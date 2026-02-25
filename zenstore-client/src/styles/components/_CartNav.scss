@@ -1,0 +1,43 @@
+.cartDirection {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #ffeb9c;
+  position: relative;
+}
+
+.cartDirection::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -23px;
+  height: 100%;
+  width: 24px;
+  background-color: #ffeb9c;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+
+.cartDirectionRed {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #fbe5d6;
+  position: relative;
+  color: red;
+}
+
+.cartDirectionRed::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -23px;
+  height: 100%;
+  width: 24px;
+  background-color: #fbe5d6;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+.cartIndicator {
+  background-color: darkblue;
+}
+
+.cartMargin {
+  margin-right: 6.8%;
+}

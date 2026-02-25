@@ -1,0 +1,65 @@
+// HotProducts 組件樣式
+// 熱門商品輪播樣式
+
+.cardWrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.cardContainer {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cardItem {
+  flex: 0 0 calc(100% / 3); // 在手機版時佔 1/3 寬度
+  padding: 0 10px;
+  width: calc(100% / 3); // 強制寬度
+  @media (min-width: 768px) {
+    flex: 0 0 calc(100% / 6); // 在桌面版時佔 1/6 寬度
+    width: calc(100% / 6); // 強制寬度
+  }
+}
+
+.arrowBtn {
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+@media (max-width: 576px) {
+  .cardSpecText {
+    font-size: 12px;
+  }
+}
+
+.imageContainer {
+  height: 150px; // 固定高度
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  @media screen and (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+.productImage {
+  max-height: 100%;
+  // max-width: 100%;
+  width: 75%;
+  object-fit: contain; // 保持圖片比例
+  @media screen and (max-width: 768px) {
+    width: 85%;
+  }
+}

@@ -1,0 +1,72 @@
+services:
+  # --- 1. 基礎設施：Redis ---
+  # 注意：在 Docker 內部，你的 back-end 要連 redis，host 請改用 "redis"
+  redis:
+    image: redis:7-alpine
+    container_name: zenstore-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # --- 2. 後端 API (back-end) ---
+  api-server:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    container_name: zenstore-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_SECURE=${MAIL_SECURE}
+      - MAIL_USER=${MAIL_USER}
+      - MAIL_PASS=${MAIL_PASS}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+      - CHATWOOT_HMAC_KEY=${CHATWOOT_HMAC_KEY}
+      - CHATWOOT_ACCOUNT_ID=${CHATWOOT_ACCOUNT_ID}
+      - CHATWOOT_API_TOKEN=${CHATWOOT_API_TOKEN}
+      - CHATWOOT_INBOX_ID=${CHATWOOT_INBOX_ID}
+      # 重要：這裡要連到上面的 redis 服務名稱
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      # Oracle 連線
+      - DBUSER=${DBUSER}
+      - PASSWORD=${PASSWORD}
+      - CONNECT_STRING=${CONNECT_STRING}
+    depends_on:
+      - redis
+
+  # --- 3. 前端前台 (zenstore-client) ---
+  frontend-user:
+    build:
+      context: ./zenstore-client
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_CHATWOOT_BASE_URL=${NEXT_PUBLIC_CHATWOOT_BASE_URL}
+        - NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN=${NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN}
+    container_name: zenstore-client
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-server
+
+  # --- 4. 前端後台 (zenstore-admin) ---
+  frontend-admin:
+    build:
+      context: ./zenstore-admin
+      dockerfile: Dockerfile
+      args:
+        # 注意：在 Docker 編譯時，這裡要指向 api-server 服務
+        - NEXT_PUBLIC_API_URL=http://api-server:8080/api/admin
+    container_name: zenstore-admin
+    restart: always
+    ports:
+      - "3001:3000" # 外部訪問 3001
+    depends_on:
+      - api-server

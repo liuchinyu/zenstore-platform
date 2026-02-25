@@ -1,0 +1,35 @@
+// TextMarquee 組件樣式
+// 跑馬燈文字動畫效果
+
+.marqueeContainer {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+}
+
+.marqueeWrapper {
+  display: inline-block;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--marquee-bg-color, transparent);
+}
+
+.marqueeText {
+  display: inline-block;
+  position: relative;
+  padding-left: 100%;
+  animation: marquee var(--marquee-duration, 10000ms) linear infinite;
+  white-space: nowrap;
+  color: var(--marquee-text-color, inherit);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

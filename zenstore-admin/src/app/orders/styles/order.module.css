@@ -1,0 +1,11 @@
+.linkItem {
+  text-decoration: none;
+}
+.linkItem:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.buttonStatusEdit:hover {
+  color: white;
+}/*# sourceMappingURL=order.module.css.map */

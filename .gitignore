@@ -1,0 +1,22 @@
+# 排除開發環境變數 (容器內會透過 env_file 讀取)
+.env
+**/.env
+**/.env.local
+**/.env.example
+
+**/tsconfig.tsbuildinfo
+**/*.tsbuildinfo
+
+# 系統與編譯垃圾
+**/node_modules/
+
+# 排除前端編譯產物
+**/.next/
+**/dist/
+
+
+**/.cursor/
+**/.DS_Store
+**/.vscode/
+
+

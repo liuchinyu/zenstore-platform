@@ -1,0 +1,264 @@
+// utilities
+
+.w-10 {
+  width: 10%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-33 {
+  width: 33.333%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.vh-30 {
+  height: 30vh;
+}
+
+.vh-40 {
+  height: 40vh;
+}
+
+.vh-40-25 {
+  height: 40.25vh;
+}
+
+.max-vh-35 {
+  max-height: 35vh;
+}
+
+.min-vh-70 {
+  min-height: 70vh;
+}
+
+.min-vh-80 {
+  min-height: 80vh;
+}
+
+.top-3 {
+  top: 3rem !important;
+}
+
+.font-0-9 {
+  font-size: 0.9rem !important;
+}
+
+.icon-sm {
+  font-size: 14px;
+}
+
+.bg-opacity-20 {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+.justify-content-stretch {
+  justify-content: stretch !important;
+}
+
+//components
+//swiper
+
+.marqueeContainer {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marqueeText {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.1s linear;
+}
+
+// offcanvas
+.offcanvas-backdrop {
+  display: none !important;
+}
+
+.offcanvas .show {
+  visibility: visible !important;
+  display: block !important;
+}
+
+.navbar-expand-md .offcanvas {
+  position: static;
+  z-index: 10;
+  flex-grow: 1;
+  width: 100% !important;
+  height: auto !important;
+  visibility: hidden !important;
+  background-color: #1f4e79 !important;
+  border: 0 !important;
+  transform: none !important;
+  transition: none;
+}
+.navbar-expand-md .offcanvas .offcanvas-header {
+  display: flex !important;
+}
+
+.offcanvas.show {
+  visibility: visible !important;
+  background-color: #1f4e79;
+  top: 3rem;
+}
+
+// grid
+@media (min-width: 768px) {
+  // utilities
+  .icon-sm {
+    font-size: 7.5px;
+  }
+  .fw-md-normal {
+    font-weight: normal !important;
+  }
+
+  //components
+  //offcanvas
+  .navbar-expand-md .offcanvas {
+    position: static;
+    z-index: 10;
+    flex-grow: 1;
+    width: 30% !important;
+    height: auto !important;
+    visibility: hidden !important;
+    background-color: #1f4e79 !important;
+    border: 0 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .navbar-expand-md .offcanvas .offcanvas-header {
+    display: flex !important;
+  }
+
+  .offcanvas.show {
+    visibility: visible !important;
+    background-color: #1f4e79;
+    top: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .font-10 {
+    font-size: 10px !important;
+  }
+
+  .nav-md-1 {
+    flex: 1 1 10%;
+  }
+  .nav-md-2 {
+    flex: 3 1 50%;
+  }
+
+  .nav-md-3 {
+    flex: 1 1 20%;
+  }
+  .h-md-auto {
+    height: auto !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .icon-sm {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .icon-sm {
+    font-size: 12px;
+  }
+}
+
+/* 側邊選單基本樣式 */
+
+/* 連結懸停效果 */
+.hover-underline {
+  position: relative;
+  color: #333;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: #0d6efd;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.react-datepicker-wrapper {
+  display: block !important;
+  width: 100%;
+}
+
+.react-datepicker__input-container {
+  display: block !important;
+  width: 100%;
+}
+
+.search-popup input {
+  width: 100%;
+  padding: 10px;
+}
+
+// 響應式文字大小設定
+// 預設文字大小（小於 md 尺寸）
+
+// 當螢幕尺寸超過 md (768px) 時，文字變大
+
+// 當螢幕尺寸超過 xl (1200px) 時，文字最大
+@media (min-width: 1290px) {
+  .text-responsive {
+    font-size: 1.375rem; // 22px
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: inherit;
+    }
+
+    p,
+    span,
+    div,
+    td,
+    th,
+    a {
+      font-size: inherit;
+    }
+  }
+
+  .text-responsive h3 {
+    font-size: 2rem; // 32px
+  }
+
+  .news-line-height {
+    line-height: 3rem;
+  }
+}

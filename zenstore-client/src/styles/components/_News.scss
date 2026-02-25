@@ -1,0 +1,38 @@
+// News 組件樣式
+// 新聞公告項目樣式
+
+.announcementItem {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  color: #212529;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  // 滑鼠懸停效果
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #007bff;
+  }
+
+  // 焦點狀態（無障礙功能）
+  &:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+  }
+}
+
+// 響應式設計
+@media (max-width: 768px) {
+  .announcementItem {
+    padding: 0.75rem;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

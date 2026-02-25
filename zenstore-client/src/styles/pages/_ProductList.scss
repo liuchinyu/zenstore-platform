@@ -1,0 +1,117 @@
+.productList_breadcrumbLink {
+  &:hover {
+    color: #a19e9e !important;
+    text-decoration: underline !important;
+  }
+}
+
+.productList_bottomBar {
+  position: fixed;
+  bottom: 0;
+  left: 19%;
+  // right: 0;
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  // border-top: 1px solid #1f9181;
+  border: 1px solid #000;
+}
+
+/* 購物車彈出視窗樣式 */
+.productList_cartModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 55px;
+  padding-right: 10px;
+}
+
+.productList_cartModal {
+  background-color: white;
+  border-radius: 6px;
+  width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  right: 50px;
+}
+
+.productList_cartModal::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 35px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+.productList_modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.productList_closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6c757d;
+  &:hover {
+    color: #212529;
+  }
+}
+
+/* 購物車加入動畫 */
+@keyframes flyToCart {
+  0% {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(0.8) translateY(-30px) translateX(20px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0) translateY(-100px) translateX(100px);
+    opacity: 0;
+  }
+}
+
+.productList_flyingItem {
+  position: fixed;
+  z-index: 2001;
+  animation: flyToCart 0.8s ease-in-out forwards;
+  pointer-events: none;
+}
+
+.productList_cartBadgeHighlight {
+  animation: highlight 0.5s ease-in-out;
+}
+
+@keyframes highlight {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

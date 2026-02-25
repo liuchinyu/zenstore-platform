@@ -1,0 +1,51 @@
+.iconSm {
+  font-size: 10px;
+}
+
+.bgColor {
+  background-color: #1f4e79 !important;
+}
+
+.iconHover {
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+  }
+}
+
+.cartBadge {
+  font-size: 0.8rem;
+  top: 0.85rem;
+  width: 1.15rem;
+  right: -0.8rem;
+  text-align: center;
+  padding-right: 2.5px;
+}
+.phoneCartBadge {
+  font-size: 0.8rem;
+  top: 0.6rem;
+  width: 1.15rem;
+  // left: ;
+  padding-right: 2.5px;
+}
+
+.searchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.searchInput {
+  &:focus {
+    box-shadow: none;
+    border-color: #ffc107;
+  }
+}

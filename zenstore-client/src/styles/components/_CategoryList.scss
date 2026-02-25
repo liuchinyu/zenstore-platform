@@ -1,0 +1,53 @@
+.categorySection {
+  margin-bottom: 2rem;
+
+  .categoryTitle {
+    color: #333;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #007bff;
+      text-decoration: underline !important;
+    }
+  }
+
+  .subcategoriesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .subcategoryItem {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 1.25rem;
+      margin-bottom: 0.5rem;
+
+      .subcategoryLink {
+        font-size: 1rem;
+        color: #666;
+        text-decoration: underline;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #007bff;
+        }
+      }
+
+      .categoryCount {
+        font-size: 0.9rem;
+        color: #007bff;
+        margin-left: 0.25rem;
+      }
+
+      .loadingSpinner {
+        margin-left: 0.25rem;
+      }
+    }
+  }
+
+  hr {
+    margin: 1rem 0;
+    border-color: #e9ecef;
+  }
+}

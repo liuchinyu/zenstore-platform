@@ -1,0 +1,31 @@
+// Footer 組件樣式
+// 頁尾樣式
+
+.footerBackground {
+  background-color: #9e7f66;
+}
+
+.footerLink {
+  text-decoration: none;
+  display: block;
+  color: #fff;
+  margin-top: 0.25rem;
+  width: 50%;
+}
+
+.mediaImage {
+  width: 20px;
+  height: 20px;
+}
+
+@media (min-width: 768px) {
+  .footerText {
+    font-size: 65%;
+  }
+}
+
+@media (min-width: 992px) {
+  .footerText {
+    font-size: 100%;
+  }
+}

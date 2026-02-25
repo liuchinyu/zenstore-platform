@@ -1,0 +1,103 @@
+.cart_orderSummary {
+  background-color: #f2f2f2;
+  padding: 1rem;
+  position: sticky;
+  width: 80%;
+  top: 40px;
+
+  h3 {
+    margin-top: 1.5rem;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.cart_orderButton {
+  background-color: #ed7d31;
+  padding: 0.5rem;
+  position: sticky;
+  top: 8px;
+  width: 40%;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #ed7d31;
+    opacity: 0.9;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+}
+
+.cartIcon {
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.8);
+
+    i.collection {
+      font-weight: 900;
+    }
+  }
+}
+
+// 手機版樣式
+@media (max-width: 991.98px) {
+  .cart_orderSummary {
+    width: 100%;
+    position: static;
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 16px;
+    }
+  }
+
+  .cart_orderButton {
+    width: 48%;
+    font-size: 12px;
+    padding: 0.4rem;
+  }
+
+  .cart-mobile-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+
+    .input-group {
+      width: 100%;
+    }
+
+    .btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// 超小螢幕優化
+@media (max-width: 575.98px) {
+  .cart_orderSummary {
+    padding: 0.75rem;
+
+    h3 {
+      font-size: 14px;
+    }
+  }
+
+  .cart_orderButton {
+    margin-bottom: 0.5rem;
+    font-size: 11px;
+  }
+
+  .cart-mobile-item {
+    padding: 0.75rem !important;
+
+    .col-4 {
+      padding-right: 0.5rem;
+    }
+
+    .col-8 {
+      padding-left: 0.5rem;
+    }
+  }
+}

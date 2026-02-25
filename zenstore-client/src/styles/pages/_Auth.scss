@@ -1,0 +1,48 @@
+.auth_registerContainer {
+  background-color: #999494bb;
+  margin: 2rem auto;
+  width: 65%;
+  border-radius: 5rem;
+  min-height: 50vh;
+}
+
+.auth_forgetForm {
+  width: 50%;
+}
+
+.auth_successContainer {
+  background-color: #d1e7dd;
+  margin: 2rem auto;
+  width: 65%;
+  border-radius: 5rem;
+  min-height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .auth_registerContainer {
+    margin-top: 1rem;
+    margin-bottom: 0px;
+    width: 90%;
+    font-size: 1.5rem;
+    min-height: 40vh;
+  }
+  .auth_forgetForm {
+    width: 80%;
+    label {
+      font-size: 1rem;
+    }
+    input {
+      font-size: 1rem;
+    }
+  }
+  .auth_profileForm {
+    font-size: 1rem;
+    input {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    select {
+      font-size: 1rem;
+    }
+  }
+}

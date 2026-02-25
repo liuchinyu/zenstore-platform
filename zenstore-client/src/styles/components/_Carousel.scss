@@ -1,0 +1,65 @@
+// Carousel 組件樣式
+// 輪播圖背景色和文字樣式
+
+.carouselBgBlue {
+  background-color: #0d6fca;
+}
+
+.caroselBgBlown {
+  background-color: #c59761;
+}
+
+.carouselBgDarkBlue {
+  background-color: #0a5692;
+}
+
+.textBlown {
+  color: #c59761;
+}
+
+.textDarkBlue {
+  color: #0a5692;
+}
+
+.carouselText {
+  font-size: 16px;
+}
+
+.carousel-img {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-image-wrapper {
+  @media (min-width: 768px) {
+    .carousel-img {
+      height: 101%;
+      object-fit: cover;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .carouselText {
+    font-size: 1rem;
+  }
+  .carouselTitle {
+    font-size: 1.75rem;
+  }
+  .wSm15 {
+    width: 15px !important;
+  }
+  .bottom11 {
+    bottom: -11px !important;
+  }
+  .mxSm6 {
+    margin: 0 6px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-inner {
+    overflow: visible;
+  }
+}

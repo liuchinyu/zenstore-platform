@@ -1,0 +1,97 @@
+// 引入 Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+.font-12 {
+  font-size: 12px;
+}
+
+.bg-color {
+  background-color: #cfe2ff;
+}
+
+.sidebar-container {
+  min-height: 100vh;
+  background-color: #7f92ac;
+  border-right: 1px solid #d1d1d1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+}
+
+// 根據圖片顏色調整菜單項的背景色
+.highlighted-item {
+  background-color: #fcf8e3 !important; // 首頁、商品資料管理等的淡黃色背景
+}
+
+// 調整頁面內容的間距和樣式
+.content-container {
+  padding: 1.5rem;
+}
+
+// 儀表板樣式
+.content-container {
+  .welcome-section {
+    background-color: #f8f9fb !important;
+  }
+
+  .stats-card {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon-container {
+      width: 48px;
+      height: 48px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .chart-card {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  .time-filter {
+    .form-select {
+      max-width: 120px;
+    }
+  }
+}
+
+// 超連結樣式
+.linkItem {
+  color: #000;
+  // text-decoration: none;
+  &:hover {
+    color: #0d21d8;
+    // text-decoration: none;
+  }
+}
+
+// 響應式調整
+@media (max-width: 768px) {
+  .content-container {
+    .stats-card,
+    .chart-card {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.sidebar-wrapper {
+  transition: all 0.3s ease;
+}
+
+.content-col {
+  transition: all 0.3s ease;
+  flex: 1;
+}

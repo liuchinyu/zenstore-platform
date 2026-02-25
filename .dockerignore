@@ -1,0 +1,25 @@
+# 排除 Git 相關
+.git
+.gitignore
+
+# 排除開發環境變數 (容器內會透過 env_file 讀取)
+.env
+**/.env
+**/.env.local
+**/.env.example
+
+**/*.tsbuildinfo
+**/tsconfig.tsbuildinfo
+
+# 排除所有層級的 node_modules (這最重要，容器內會自己 npm install)
+**/node_modules
+
+# 排除前端編譯產物
+**/.next
+**/dist
+**/build
+
+# 排除說明文件與編輯器設定
+**/README.md
+**/.cursor
+

@@ -1,0 +1,97 @@
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #e9ecef;
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineMarker {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #e9ecef;
+}
+.timelineMarker::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.timelineContent {
+  background-color: #f8f9fa;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  border-left: 3px solid #007bff;
+}
+.timelineContent h6 {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.timelineContent .statusChange {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.timelineContent .statusChange .changeLabel {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+.timelineContent .changeInfo {
+  color: #6c757d;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+.timelineContent .changeInfo:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 1.5rem;
+  }
+  .timeline::before {
+    left: 0.5rem;
+  }
+  .timelineItem .timelineMarker {
+    left: -1.25rem;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .timelineContent {
+    padding: 0.75rem;
+  }
+  .timelineContent .statusChange {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}/*# sourceMappingURL=OrderStatusChangeLog.module.css.map */

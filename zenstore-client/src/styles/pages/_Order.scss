@@ -1,0 +1,23 @@
+.orders_orderContainer {
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .orderRow {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .orders_orderContainer {
+    h1 {
+      font-size: 1.25rem;
+    }
+  }
+}

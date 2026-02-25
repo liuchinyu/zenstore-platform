@@ -1,0 +1,93 @@
+// 簡化版載入指示器樣式
+.simple-loading-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  animation: slideInRight 0.3s ease-out;
+  max-width: 200px;
+  min-width: 120px;
+}
+
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  background: #007bff;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.loading-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 動畫定義
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// 響應式設計
+@media (max-width: 768px) {
+  .simple-loading-indicator {
+    top: 15px;
+    right: 15px;
+    padding: 8px 12px;
+    font-size: 13px;
+    max-width: 150px;
+    min-width: 100px;
+  }
+
+  .loading-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-loading-indicator {
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
+    max-width: 120px;
+    min-width: 80px;
+  }
+
+  .loading-dot {
+    width: 5px;
+    height: 5px;
+  }
+}
