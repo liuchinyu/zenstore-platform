@@ -49,10 +49,19 @@ services:
       args:
         - NEXT_PUBLIC_CHATWOOT_BASE_URL=${NEXT_PUBLIC_CHATWOOT_BASE_URL}
         - NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN=${NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN}
+        - NEXT_IMAGE_UNOPTIMIZED=${NEXT_IMAGE_UNOPTIMIZED}
     container_name: zenstore-client
     restart: always
     ports:
       - "3000:3000"
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - NEXT_IMAGE_UNOPTIMIZED=${NEXT_IMAGE_UNOPTIMIZED}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    dns:
+      - 8.8.8.8
+      - 10.1.1.1 # 加入您內部的 DNS
     depends_on:
       - api-server
 

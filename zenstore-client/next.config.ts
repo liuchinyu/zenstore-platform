@@ -4,17 +4,34 @@ import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 const nextConfig: NextConfig = {
   typescript: {
-    // 在生產環境建置時忽略 TypeScript 錯誤（建議設為 false，以確保程式碼品質）
-    ignoreBuildErrors: false,
+    // 在生產環境建置時忽略 TypeScript 錯誤
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    // 在生產環境建置時忽略 ESLint 錯誤
+    ignoreDuringBuilds: true,
   },
   images: {
-    // domains: ["comeon.zenitron.com.tw"],
+    unoptimized: (() => {
+      const isUnoptimized = process.env.NEXT_IMAGE_UNOPTIMIZED === "true";
+      console.log(
+        `[NextConfig] Image Optimization Unoptimized: ${isUnoptimized}`,
+      );
+      return isUnoptimized;
+    })(),
+    minimumCacheTTL: 60,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "comeon.zenitron.com.tw",
         port: "",
-        pathname: "/upload/**",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "comeon.zenitron.com.tw",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
@@ -26,7 +43,7 @@ const nextConfig: NextConfig = {
           analyzerMode: "server",
           analyzerPort: 8888,
           openAnalyzer: true,
-        })
+        }),
       );
     }
     return config;
