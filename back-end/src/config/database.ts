@@ -24,7 +24,7 @@ async function initializePool() {
       // 只有在連接池不存在時才創建（NJS-047錯誤）
       if (err instanceof Error && err.message.includes("NJS-047")) {
         await oracledb.createPool({
-          user: process.env.USER,
+          user: process.env.DBUSER,
           password: process.env.PASSWORD,
           connectString: process.env.CONNECT_STRING,
           poolAlias: POOL_ALIAS,
