@@ -456,9 +456,6 @@
     transform: translateX(0);
   }
 }
-.cartModal {
-  /* 小手機版樣式 */
-}
 @media (max-width: 576px) {
   .cartModal {
     padding: 15px;
@@ -516,9 +513,6 @@
 
 /* 手機版表格樣式 */
 @media (max-width: 768px) {
-  .cartModal {
-    /* 手機版標題區域 */
-  }
   .cartModal .modalHeader {
     padding-bottom: 20px;
     margin-bottom: 20px;
@@ -539,14 +533,8 @@
     padding: 12px 8px;
     vertical-align: middle;
   }
-  .cartModal .table {
-    /* 產品圖片在手機版調整 */
-  }
   .cartModal .table td:first-child {
     width: 70px !important;
-  }
-  .cartModal .table {
-    /* 產品資訊欄位 */
   }
   .cartModal .table td:nth-child(2) {
     padding-left: 12px;
@@ -565,9 +553,6 @@
   .cartModal .table td:nth-child(2) a:hover {
     text-decoration: underline;
   }
-  .cartModal .table td:nth-child(2) {
-    /* 數量選擇器在手機版調整 */
-  }
   .cartModal .table td:nth-child(2) .input-group {
     width: 120px !important;
     margin-top: 8px;
@@ -583,18 +568,12 @@
     padding: 0 12px;
     font-weight: bold;
   }
-  .cartModal .table {
-    /* 價格欄位 */
-  }
   .cartModal .table td:last-child {
     font-size: 16px;
     text-align: right;
     padding-left: 8px;
     font-weight: 600;
     color: #dc3545;
-  }
-  .cartModal {
-    /* 總計行在手機版調整 */
   }
   .cartModal tfoot td {
     font-size: 16px;
@@ -607,11 +586,9 @@
     font-size: 18px;
   }
 }
-/* 小手機版表格樣式 */
 @media (max-width: 576px) {
   .cartModal {
     padding: 12px;
-    /* 小手機版標題區域 */
   }
   .cartModal .modalHeader {
     padding-bottom: 15px;
@@ -629,14 +606,8 @@
   .cartModal .table td {
     padding: 10px 6px;
   }
-  .cartModal .table {
-    /* 產品圖片在小手機版進一步調整 */
-  }
   .cartModal .table td:first-child {
     width: 60px !important;
-  }
-  .cartModal .table {
-    /* 產品資訊欄位在小手機版調整 */
   }
   .cartModal .table td:nth-child(2) {
     padding-left: 10px;
@@ -647,9 +618,6 @@
   }
   .cartModal .table td:nth-child(2) a {
     font-size: 12px;
-  }
-  .cartModal .table td:nth-child(2) {
-    /* 數量選擇器在小手機版調整 */
   }
   .cartModal .table td:nth-child(2) .input-group {
     width: 110px !important;
@@ -664,14 +632,8 @@
     font-size: 14px;
     padding: 0 10px;
   }
-  .cartModal .table {
-    /* 價格欄位在小手機版調整 */
-  }
   .cartModal .table td:last-child {
     font-size: 14px;
-  }
-  .cartModal {
-    /* 總計行在小手機版調整 */
   }
   .cartModal tfoot td {
     font-size: 14px;
