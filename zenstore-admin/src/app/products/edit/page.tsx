@@ -14,7 +14,9 @@ import { ProductSidebar } from "./components/ProductSidebar";
 import { ProductSEO } from "../components/ProductSEO";
 import ImagePreviewModal from "@/components/ImagePreviewModal";
 
-const EditProduct = () => {
+import { Suspense } from "react";
+
+const EditProductContent = () => {
   const { methods, state, actions, refs } = useEditProduct();
 
   if (state.isLoading) {
@@ -127,6 +129,14 @@ const EditProduct = () => {
         />
       </form>
     </FormProvider>
+  );
+};
+
+const EditProduct = () => {
+  return (
+    <Suspense fallback={<div className="container-fluid p-4">載入中...</div>}>
+      <EditProductContent />
+    </Suspense>
   );
 };
 

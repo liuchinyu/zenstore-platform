@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useToast } from "@/components/ui/Toast";
@@ -11,7 +11,7 @@ import PaginationComponent from "@/components/ui/Pagination/PaginationComponent"
 import { useMemberGroups } from "@/hooks/useMemberGroups";
 import { useMember } from "@/hooks/useMember";
 
-const MembersPage = () => {
+const MembersPageContent = () => {
   const searchParams = useSearchParams();
   const {
     totalPages, // 總頁數
@@ -27,8 +27,6 @@ const MembersPage = () => {
     resetFilters,
     handleSearch,
   } = useMember();
-
-  console.log("memberList", memberList);
 
   // 篩選 Modal 狀態
   const [showFilterModal, setShowFilterModal] = useState<boolean>(false);
@@ -53,6 +51,9 @@ const MembersPage = () => {
 
   // 群組url導覽
   useEffect(() => {
+    // 確保只在瀏覽器端執行
+    if (typeof window === "undefined") return;
+
     const lastPageUrl = localStorage.getItem("lastPageUrl");
     const currentUrl = window.location.href;
     if (lastPageUrl === currentUrl) {
@@ -393,6 +394,14 @@ const MembersPage = () => {
         onClose={() => setShowFilterModal(false)}
       />
     </div>
+  );
+};
+
+const MembersPage = () => {
+  return (
+    <Suspense fallback={<div className="container-fluid p-4">載入中...</div>}>
+      <MembersPageContent />
+    </Suspense>
   );
 };
 
