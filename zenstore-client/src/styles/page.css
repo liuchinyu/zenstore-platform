@@ -335,8 +335,8 @@
   border-color: #ff943d;
 }
 .checkout_submitButton:hover {
-  background-color: #ff780a;
-  border-color: #ff780a;
+  background-color: rgb(255, 119.8711340206, 10);
+  border-color: rgb(255, 119.8711340206, 10);
 }
 
 .checkout_productLink {
