@@ -33,8 +33,6 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   icon,
   iconBg,
 }) => {
-  console.log("title", title);
-  console.log("value", value);
   return (
     <Card className="stats-card">
       <div className="d-flex align-items-center">

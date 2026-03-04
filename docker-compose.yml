@@ -72,7 +72,9 @@ services:
       dockerfile: Dockerfile
       args:
         # 注意：在 Docker 編譯時，這裡要指向 api-server 服務
-        - NEXT_PUBLIC_API_URL=http://api-server:8080/api/admin
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     container_name: zenstore-admin
     restart: always
     ports:

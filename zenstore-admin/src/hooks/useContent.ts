@@ -8,7 +8,6 @@ export const useContent = () => {
   const dispatch = useAppDispatch();
   const orderList = useAppSelector(selectOrders);
   const { products } = useAppSelector((state) => state.product);
-  console.log("products", products);
 
   const [unshippedOrder, setUnshippedOrder] = useState("");
 

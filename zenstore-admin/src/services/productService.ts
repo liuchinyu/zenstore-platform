@@ -1,23 +1,15 @@
 import axios from "axios";
 import { CategoryType } from "../types/products/categoryType";
-// const API_URL = "http://localhost:8080/api/admin/product";
-
-// const Category = require("../../../types/product").category;
+import axiosInstance from "../lib/axiosInstance";
 
 class ProductService {
-  private readonly API_URL: string;
-
-  constructor() {
-    this.API_URL =
-      process.env.NEXT_PUBLIC_API_URL + "/product" ||
-      "http://localhost:8080/api/admin/product";
-  }
+  private readonly RESOURCE_PATH = "/product";
 
   //獲取所有產品(有分頁)
   async getProductListByPage(page: number, pageSize: number, filters: any) {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/admin/product/productListByPage",
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/productListByPage",
         {
           params: { page, pageSize, filters },
         },
@@ -34,7 +26,9 @@ class ProductService {
   //取得商品分類
   async getProductCategory() {
     try {
-      const response = await axios.get(this.API_URL + "/productCategory");
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/productCategory",
+      );
       return response.data.data;
     } catch (e) {
       console.log(e);
@@ -45,7 +39,9 @@ class ProductService {
   //取得製造商分類
   async getManufactureCategory() {
     try {
-      const response = await axios.get(this.API_URL + "/manufactureCategory");
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/manufactureCategory",
+      );
       return response.data.data;
     } catch (e) {
       console.log(e);
@@ -56,7 +52,9 @@ class ProductService {
   // 取得商品、製造商所有分類
   async getAllCategory() {
     try {
-      const response = await axios.get(this.API_URL + "/allCategory");
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/allCategory",
+      );
       return response.data.data;
     } catch (e) {
       console.log(e);
@@ -67,7 +65,9 @@ class ProductService {
   // 取得分類關聯
   async getCategoryRelation() {
     try {
-      const response = await axios.get(this.API_URL + "/categoryRelation");
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/categoryRelation",
+      );
       return response.data;
     } catch (e) {
       console.log(e);
@@ -78,9 +78,12 @@ class ProductService {
   // 套用分類
   async applyCategory(payload: any) {
     try {
-      const response = await axios.post(this.API_URL + "/applyCategory", {
-        payload,
-      });
+      const response = await axiosInstance.post(
+        this.RESOURCE_PATH + "/applyCategory",
+        {
+          payload,
+        },
+      );
       return response.data;
     } catch (error) {
       console.log(error);
@@ -96,7 +99,7 @@ class ProductService {
     extraAttributes: any = {},
   ) {
     try {
-      return axios.post(this.API_URL + "/category", {
+      return axiosInstance.post(this.RESOURCE_PATH + "/category", {
         category_title,
         parent_id,
         category_level,
@@ -110,7 +113,7 @@ class ProductService {
   // 修改分類
   async updateCategory(category_id: number, category_title: string) {
     try {
-      return axios.patch(this.API_URL + "/category", {
+      return axiosInstance.patch(this.RESOURCE_PATH + "/category", {
         category_id,
         category_title,
       });
@@ -121,7 +124,9 @@ class ProductService {
 
   async checkChildCategories(category_id: number) {
     try {
-      return axios.get(this.API_URL + "/checkChildCategories/" + category_id);
+      return axiosInstance.get(
+        this.RESOURCE_PATH + "/checkChildCategories/" + category_id,
+      );
     } catch (e) {
       console.log(e);
     }
@@ -130,7 +135,7 @@ class ProductService {
   // 刪除分類
   async deleteCategory(category_id: number) {
     try {
-      return axios.delete(this.API_URL + "/category", {
+      return axiosInstance.delete(this.RESOURCE_PATH + "/category", {
         data: {
           category_id,
         },
@@ -143,7 +148,7 @@ class ProductService {
   // 創建產品
   async createProduct(payload: any) {
     try {
-      const response = await axios.post(this.API_URL, payload);
+      const response = await axiosInstance.post(this.RESOURCE_PATH, payload);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -153,7 +158,9 @@ class ProductService {
   // 取得指定ID商品
   async getProductById(oracle_id: string) {
     try {
-      const response = await axios.get(this.API_URL + "/" + oracle_id);
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/" + oracle_id,
+      );
       return response.data;
     } catch (error) {
       console.log(error);
@@ -163,7 +170,7 @@ class ProductService {
   // 更新產品
   async updateProduct(payload: any) {
     try {
-      const response = await axios.patch(this.API_URL, payload);
+      const response = await axiosInstance.patch(this.RESOURCE_PATH, payload);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -173,7 +180,7 @@ class ProductService {
   // 創建標籤
   async createTag(tag_name: string) {
     try {
-      const response = await axios.post(this.API_URL + "/tag", {
+      const response = await axiosInstance.post(this.RESOURCE_PATH + "/tag", {
         tag_name,
       });
       return response;
@@ -184,7 +191,7 @@ class ProductService {
   // 取得標籤資料
   async getTags() {
     try {
-      const response = await axios.get(this.API_URL + "/tag");
+      const response = await axiosInstance.get(this.RESOURCE_PATH + "/tag");
       return response.data;
     } catch (error) {
       console.log(error);
@@ -193,7 +200,7 @@ class ProductService {
   // 更新標籤
   async updateTag(tag_id: number, tag_name: string) {
     try {
-      const response = await axios.patch(this.API_URL + "/tag", {
+      const response = await axiosInstance.patch(this.RESOURCE_PATH + "/tag", {
         tag_id,
         tag_name,
       });
@@ -205,7 +212,7 @@ class ProductService {
   // 刪除標籤
   async deleteTag(tag_id: number) {
     try {
-      const response = await axios.delete(this.API_URL + "/tag", {
+      const response = await axiosInstance.delete(this.RESOURCE_PATH + "/tag", {
         data: {
           tag_id,
         },
@@ -219,7 +226,9 @@ class ProductService {
   // 取得標籤關聯資料
   async getTagRelation() {
     try {
-      const response = await axios.get(this.API_URL + "/tagRelation");
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/tagRelation",
+      );
       return response.data;
     } catch (error) {
       console.log("error", error);
@@ -228,9 +237,12 @@ class ProductService {
   // 套用標籤
   async applyTag(payload: any) {
     try {
-      const response = await axios.post(this.API_URL + "/applyTag", {
-        payload,
-      });
+      const response = await axiosInstance.post(
+        this.RESOURCE_PATH + "/applyTag",
+        {
+          payload,
+        },
+      );
       if (response.data && response.data.success) {
         await this.updateTagProductCount();
       }
@@ -242,7 +254,10 @@ class ProductService {
   // 更新標籤產品數量
   async updateTagProductCount() {
     try {
-      const response = await axios.patch(this.API_URL + "/updateTagCount", {});
+      const response = await axiosInstance.patch(
+        this.RESOURCE_PATH + "/updateTagCount",
+        {},
+      );
       return response.data;
     } catch (error) {
       console.log(error);
@@ -260,7 +275,10 @@ class ProductService {
       formData.append("type", type);
       formData.append("oracle_id", oracle_id);
       formData.append("brand", brand);
-      const response = await axios.post(this.API_URL + "/upload", formData);
+      const response = await axiosInstance.post(
+        this.RESOURCE_PATH + "/upload",
+        formData,
+      );
       return response.data;
     } catch (e) {
       console.log(e);
@@ -268,19 +286,25 @@ class ProductService {
   }
   // 刪除圖片
   async deleteImage(payload: any) {
-    const response = await axios.delete(this.API_URL + "/delete", {
-      data: payload,
-    });
+    const response = await axiosInstance.delete(
+      this.RESOURCE_PATH + "/delete",
+      {
+        data: payload,
+      },
+    );
     return response.data;
   }
   // 匯出excel
   async exportExcel(selectedProducts: string[]) {
     try {
-      const response = await axios.get(this.API_URL + "/export-excel", {
-        params: {
-          selectedProducts,
+      const response = await axiosInstance.get(
+        this.RESOURCE_PATH + "/export-excel",
+        {
+          params: {
+            selectedProducts,
+          },
         },
-      });
+      );
       return response.data;
     } catch (error) {
       console.log(error);
@@ -290,8 +314,8 @@ class ProductService {
   // 匯入Excel
   async importExcel(formData: FormData) {
     try {
-      const response = await axios.post(
-        this.API_URL + "/import-excel",
+      const response = await axiosInstance.post(
+        this.RESOURCE_PATH + "/import-excel",
         formData,
       );
       console.log("improt_response", response);
@@ -310,10 +334,13 @@ class ProductService {
 
   // 上下架
   async publishProduct(oracle_id: string[], is_published: number) {
-    const response = await axios.patch(this.API_URL + "/publish", {
-      oracle_id,
-      is_published,
-    });
+    const response = await axiosInstance.patch(
+      this.RESOURCE_PATH + "/publish",
+      {
+        oracle_id,
+        is_published,
+      },
+    );
     return response.data;
   }
 }
