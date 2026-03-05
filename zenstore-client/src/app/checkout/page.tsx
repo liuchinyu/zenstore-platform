@@ -12,7 +12,10 @@ import LoadingLink from "@/components/LoadingLink/LoadingLink";
 import Image from "next/image";
 import { useGlobalLoading } from "@/hooks/useGlobalLoading";
 import { useDynamicReducer } from "@/hooks/useDynamicReducer"; //動態導入reducer
-import { selectMemberId } from "@/store/selectors/authSelectors";
+import {
+  selectMemberId,
+  selectIsAuthenticated,
+} from "@/store/selectors/authSelectors";
 import { selectShippingInfo } from "@/store/selectors/checkoutSelectors";
 import {
   selectAddresses,
@@ -20,6 +23,7 @@ import {
 } from "@/store/selectors/addressesSelector";
 import { getAddresses } from "@/store/addressSlice";
 import { ShippingAddress } from "@/types";
+import { useToast } from "@/hooks/useToast";
 
 // 常數定義
 const SHIPPING_FEE = 100;
@@ -69,7 +73,10 @@ export default function Checkout() {
   // 追蹤是否已經初始化過表單
   const [isFormInitialized, setIsFormInitialized] = useState(false);
 
+  const { showToast } = useToast();
+
   const member_id = useAppSelector(selectMemberId);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const cart_items = useAppSelector((state) => state.cart?.items);
   const { totalPrice } = useCart();
   const addresses = useAppSelector(selectAddresses); //常用地址
@@ -92,6 +99,14 @@ export default function Checkout() {
 
   // 使用 useMemo 計算總金額
   const finalTotal = useMemo(() => totalPrice + SHIPPING_FEE, [totalPrice]);
+
+  // 路由保護：未登入時踢回登入頁
+  useEffect(() => {
+    if (!isAuthenticated) {
+      showToast("請先登入才可進行結帳", "error");
+      navigateWithLoading("/auth/login?redirectedFrom=/checkout");
+    }
+  }, [isAuthenticated, navigateWithLoading]);
 
   // 初始化表單資料 (從 Redux 恢復)
   useEffect(() => {
