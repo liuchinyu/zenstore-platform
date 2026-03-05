@@ -21,7 +21,7 @@ import {
 export default function Wishlist() {
   const isWishlistLoaded = useDynamicReducer(
     "wishlist",
-    () => import("@/store/wishlistSlice")
+    () => import("@/store/wishlistSlice"),
   );
 
   const dispatch = useAppDispatch();

@@ -29,7 +29,7 @@ import { fetchCart } from "@/store/cartSlice";
 export default function Cart() {
   const isWishlistLoaded = useDynamicReducer(
     "wishlist",
-    () => import("@/store/wishlistSlice")
+    () => import("@/store/wishlistSlice"),
   );
   const dispatch = useAppDispatch();
   const { showToast } = useToast();
@@ -72,7 +72,7 @@ export default function Cart() {
       if (isInWishlist) {
         // 從收藏清單中移除
         const wishlistItemExist = wishlistItem.find(
-          (item: any) => item.ORACLE_ID === oracleId
+          (item: any) => item.ORACLE_ID === oracleId,
         );
 
         if (wishlistItemExist?.WISHLIST_ID) {
@@ -80,14 +80,14 @@ export default function Cart() {
             removeFromWishlist({
               wishlist_id: wishlistItemExist.WISHLIST_ID,
               member_id,
-            })
+            }),
           );
           showToast("已從收藏清單中移除", "success");
         }
       } else {
         // 加入收藏清單
         await dispatch(
-          addToWishlist({ member_id: member_id, oracle_id: oracleId })
+          addToWishlist({ member_id: member_id, oracle_id: oracleId }),
         );
         showToast("已加入收藏清單", "success");
       }
@@ -103,7 +103,7 @@ export default function Cart() {
       if (member_id) {
         try {
           const fetchCartPromise = await dispatch(
-            fetchCart(member_id)
+            fetchCart(member_id),
           ).unwrap();
           if (fetchCartPromise.overValueMessage) {
             showToast(fetchCartPromise.overValueMessage, "info");
@@ -213,7 +213,7 @@ export default function Cart() {
                                   }
                                   handleQuantityChange(
                                     oracleId,
-                                    -item.FIXED_LOT_MULTIPLIER
+                                    -item.FIXED_LOT_MULTIPLIER,
                                   );
                                 }}
                                 aria-label="減少數量"
@@ -227,7 +227,7 @@ export default function Cart() {
                                 className="form-control text-center border-top border-secondary"
                                 value={
                                   editingIdsRef.current.has(item.ORACLE_ID)
-                                    ? inputValues[item.ORACLE_ID] ?? ""
+                                    ? (inputValues[item.ORACLE_ID] ?? "")
                                     : String(Number(item.QUANTITY) || 0)
                                 }
                                 onChange={(e) => {
@@ -235,7 +235,7 @@ export default function Cart() {
                                   // 僅允許數字，允許空字串以便使用者輸入中
                                   const raw = e.target.value.replace(
                                     /[^\d]/g,
-                                    ""
+                                    "",
                                   );
                                   editingIdsRef.current.add(oracleId);
                                   setInputValues((prev) => ({
@@ -299,7 +299,7 @@ export default function Cart() {
                                   }
                                   handleQuantityChange(
                                     oracleId,
-                                    item.FIXED_LOT_MULTIPLIER
+                                    item.FIXED_LOT_MULTIPLIER,
                                   );
                                 }}
                                 aria-label="增加數量"
@@ -315,7 +315,7 @@ export default function Cart() {
                           <td className="text-end">
                             NT$
                             {(item.QUANTITY * item.PRICE).toLocaleString(
-                              "zh-TW"
+                              "zh-TW",
                             )}
                           </td>
                           <td>
@@ -441,7 +441,7 @@ export default function Cart() {
                                 }
                                 handleQuantityChange(
                                   oracleId,
-                                  -item.FIXED_LOT_MULTIPLIER
+                                  -item.FIXED_LOT_MULTIPLIER,
                                 );
                               }}
                               aria-label="減少數量"
@@ -455,7 +455,7 @@ export default function Cart() {
                               className="form-control text-center"
                               value={
                                 editingIdsRef.current.has(item.ORACLE_ID)
-                                  ? inputValues[item.ORACLE_ID] ?? ""
+                                  ? (inputValues[item.ORACLE_ID] ?? "")
                                   : String(Number(item.QUANTITY) || 0)
                               }
                               onChange={(e) => {
@@ -463,7 +463,7 @@ export default function Cart() {
                                 // 僅允許數字，允許空字串以便使用者輸入中
                                 const raw = e.target.value.replace(
                                   /[^\d]/g,
-                                  ""
+                                  "",
                                 );
                                 editingIdsRef.current.add(oracleId);
                                 setInputValues((prev) => ({
@@ -525,7 +525,7 @@ export default function Cart() {
                                 }
                                 handleQuantityChange(
                                   oracleId,
-                                  item.FIXED_LOT_MULTIPLIER
+                                  item.FIXED_LOT_MULTIPLIER,
                                 );
                               }}
                               aria-label="增加數量"
@@ -544,7 +544,7 @@ export default function Cart() {
                           <div className="fw-bold">
                             小計: NT$
                             {(item.QUANTITY * item.PRICE).toLocaleString(
-                              "zh-TW"
+                              "zh-TW",
                             )}
                           </div>
                         </div>
@@ -565,12 +565,12 @@ export default function Cart() {
                 件商品
               </span>
               <p className="mt-3">{`商品總計 : NT$${totalPrice.toLocaleString(
-                "zh-TW"
+                "zh-TW",
               )}`}</p>
               <p>{`運費 : NT$100`}</p>
               <hr />
               <h3>{`總計 : NT$${(totalPrice + 100).toLocaleString(
-                "zh-TW"
+                "zh-TW",
               )}`}</h3>
               <div className="d-flex mt-5 justify-content-around">
                 <LoadingLink
