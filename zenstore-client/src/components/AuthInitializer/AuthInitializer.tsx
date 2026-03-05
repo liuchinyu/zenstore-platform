@@ -9,7 +9,7 @@ import { setCart } from "@/store/cartSlice";
 const AuthInitializer = () => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(
-    (state) => state.auth?.isAuthenticated
+    (state) => state.auth?.isAuthenticated,
   );
   const user = useAppSelector((state) => state.auth?.user);
   const companyData = useAppSelector((state) => state.auth?.companyData); // 新增：讀取公司資料
@@ -33,7 +33,7 @@ const AuthInitializer = () => {
           dispatch(setUser(response.data.userData));
           if (response.data.userData.MEMBER_TYPE === "企業會員") {
             const companyData = await AuthService.getCompanyData(
-              response.data.userData.MEMBER_ID
+              response.data.userData.MEMBER_ID,
             );
             dispatch(setCompanyData(companyData.data.companyData.rows));
           }
@@ -68,18 +68,20 @@ const AuthInitializer = () => {
           !currentPath.includes("/auth/register")
         ) {
           window.location.href = `/auth/login?redirectedFrom=${encodeURIComponent(
-            currentPath
+            currentPath,
           )}&toast=${encodeURIComponent(
-            "登入已過期，請重新登入"
+            "登入已過期，請重新登入",
           )}&toastType=error`;
         }
+        // 只有「原本已登入」的用戶登出，才清空購物車資料
+        // 訪客不應受此影響，避免 Redux Persist 的本地購物車被誤刪
+        dispatch(setCart({}));
+        // localStorage.removeItem("persist:cart");
       }
       // 無論如何，確保前端狀態與後端一致（清空狀態）
       dispatch(setIsAuthenticated(false));
       dispatch(setUser(null));
       dispatch(setCompanyData(null));
-      dispatch(setCart({}));
-      localStorage.removeItem("persist:cart");
       AuthService.clearUserDataCache(); //清空 API 快取
     };
     window.addEventListener("auth:unauthorized", handleUnauthorized);
