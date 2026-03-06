@@ -1,4 +1,5 @@
-import axiosInstance, { axios } from "@/lib/axios";
+import axios from "axios";
+import axiosInstance from "@/lib/axios";
 import { ApiResponse, LoginCredentials, RegisterCredentials } from "@/types";
 
 class AuthService {

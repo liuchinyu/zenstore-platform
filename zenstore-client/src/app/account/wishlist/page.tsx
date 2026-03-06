@@ -5,7 +5,6 @@ import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { fetchWishlist } from "@/store/wishlistSlice";
 import WishlistCard from "@/components/WishlistCard/WishlistCard";
 import EmptyWishlist from "@/components/EmptyWishlist/EmptyWishlist";
-import { useDynamicReducer } from "@/hooks/useDynamicReducer";
 import {
   selectWishlistItems,
   selectWishlistIsInitialized,

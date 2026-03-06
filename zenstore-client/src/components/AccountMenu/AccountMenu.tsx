@@ -14,30 +14,25 @@ const AccountMenu = () => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
 
-  const isWishlistLoaded = useDynamicReducer(
-    "wishlist",
-    () => import("@/store/wishlistSlice")
-  );
-
   const isAuthenticated = useAppSelector(
-    (state) => state.auth?.isAuthenticated
+    (state) => state.auth?.isAuthenticated,
   );
   const member_id = useAppSelector(selectMemberId);
 
   const wishlistItems = useAppSelector(
-    (state: ExtendedRootState) => state.wishlist?.items || []
+    (state: ExtendedRootState) => state.wishlist?.items || [],
   );
 
   const isInitialized = useAppSelector(
-    (state: ExtendedRootState) => state.wishlist?.isInitialized
+    (state: ExtendedRootState) => state.wishlist?.isInitialized,
   );
 
   // 僅負責初始化抓取收藏清單（增加初始化檢查防止重複抓取）
   useEffect(() => {
-    if (isAuthenticated && member_id && isWishlistLoaded && !isInitialized) {
+    if (isAuthenticated && member_id && !isInitialized) {
       dispatch(fetchWishlist(member_id));
     }
-  }, [isAuthenticated, member_id, isWishlistLoaded, isInitialized, dispatch]);
+  }, [isAuthenticated, member_id, isInitialized, dispatch]);
 
   const menuItems = [
     {
