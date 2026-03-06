@@ -18,6 +18,7 @@ import headerReducer from "./headerSlice";
 import authReducer from "./authSlice";
 import cartReducer from "./cartSlice";
 import toastReducer from "./toastSlice";
+import wishlistReducer from "./wishlistSlice";
 
 //單獨配置持久化
 const cartPersistConfig = {
@@ -48,6 +49,7 @@ const createRootReducer = (asyncReducers: Record<string, any> = {}) => {
     auth: persistedAuthReducer, // 使用持久化的 auth reducer
     cart: persistedCartReducer, // 使用持久化的 cart reducer
     toast: toastReducer,
+    wishlist: wishlistReducer,
     ...asyncReducers,
   });
 };

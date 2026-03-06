@@ -46,9 +46,11 @@ const AuthInitializer = () => {
         }
       } catch (error) {
         console.log("檢查登入狀態失敗", error);
-        // 發生錯誤時，假設未登入
-        dispatch(setIsAuthenticated(false));
-        dispatch(setUser(null));
+        // 只有原本以為是登入狀態，才需要清空狀態
+        if (isAuthenticated || user) {
+          dispatch(setIsAuthenticated(false));
+          dispatch(setUser(null));
+        }
       }
     };
 
@@ -76,13 +78,12 @@ const AuthInitializer = () => {
         // 只有「原本已登入」的用戶登出，才清空購物車資料
         // 訪客不應受此影響，避免 Redux Persist 的本地購物車被誤刪
         dispatch(setCart({}));
+        dispatch(setIsAuthenticated(false));
+        dispatch(setUser(null));
+        dispatch(setCompanyData(null));
+        AuthService.clearUserDataCache(); //清空 API 快取
         // localStorage.removeItem("persist:cart");
       }
-      // 無論如何，確保前端狀態與後端一致（清空狀態）
-      dispatch(setIsAuthenticated(false));
-      dispatch(setUser(null));
-      dispatch(setCompanyData(null));
-      AuthService.clearUserDataCache(); //清空 API 快取
     };
     window.addEventListener("auth:unauthorized", handleUnauthorized);
     return () => {

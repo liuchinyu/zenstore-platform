@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { fetchWishlist } from "@/store/wishlistSlice";
 import WishlistCard from "@/components/WishlistCard/WishlistCard";
 import EmptyWishlist from "@/components/EmptyWishlist/EmptyWishlist";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/useToast";
 import { useDynamicReducer } from "@/hooks/useDynamicReducer";
 import {
   selectWishlistItems,
@@ -19,19 +17,20 @@ import {
 } from "@/store/selectors/authSelectors";
 
 export default function Wishlist() {
-  const isWishlistLoaded = useDynamicReducer(
-    "wishlist",
-    () => import("@/store/wishlistSlice"),
-  );
-
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const { showToast } = useToast();
+
+  // ====== 診斷 Log：追蹤 Wishlist 掛載/卸載 ======
+  const renderCountRef = useRef(0);
+  renderCountRef.current += 1;
+  console.log(`[Wishlist] 渲染 #${renderCountRef.current}`);
+
+  useEffect(() => {
+    console.log("[Wishlist] 組件掛載 (Mount)");
+    return () => console.log("[Wishlist] 組件卸載 (Unmount)");
+  }, []);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const member_id = useAppSelector(selectMemberId);
-
-  // 動態注入 wishlist slice
 
   const wishlistItems = useAppSelector(selectWishlistItems);
   const isInitialized = useAppSelector(selectWishlistIsInitialized);
@@ -39,22 +38,10 @@ export default function Wishlist() {
 
   useEffect(() => {
     // 客戶端已認證，初次渲染時獲取收藏清單
-    if (member_id && isWishlistLoaded && !isInitialized) {
-      console.log("獲取收藏清單");
+    if (member_id && isAuthenticated && !isInitialized) {
       dispatch(fetchWishlist(member_id));
     }
-
-    // 如果客戶端渲染但未認證，顯示提示並導向登入頁面
-    if (!isAuthenticated) {
-      showToast("請先登入才可查看收藏清單", "error");
-      router.push("/auth/login?redirect=/account/wishlist");
-    }
-  }, [dispatch, isAuthenticated, router, member_id, isWishlistLoaded]);
-
-  // 在客戶端渲染前或未登入時，不顯示內容
-  if (!isAuthenticated) {
-    return null;
-  }
+  }, [dispatch, isAuthenticated, member_id, isInitialized]);
 
   return (
     <div className="container">

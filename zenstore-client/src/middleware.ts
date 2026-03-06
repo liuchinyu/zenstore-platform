@@ -23,16 +23,21 @@ export function middleware(request: NextRequest) {
     isStandardPrefetch || isRscRequest || isAjaxRequest;
 
   if (!tokenCookie) {
+    // 關鍵修復：因為 Docker 環境下 RSC 請求可能遺失 Cookie
+    // 所以我們將所有的預取與背景請求 (含 RSC) 都放行，交由帶有 Redux 持久化 Token 的 Client 端處理權限
     if (isBackgroundRequest) {
-      // 對於所有的背景/預取請求，不執行跳轉，直接放行給 React 組件處理
-      // 這樣才不會因為 307 Redirect 破壞 Client Router 的狀態
       return NextResponse.next();
     }
 
     const loginUrl = new URL("/auth/login", request.nextUrl.origin);
-    loginUrl.searchParams.set("redirectedFrom", request.nextUrl.pathname);
+    // 統一參數名稱為 redirect，與 Page 端邏輯對齊
+    loginUrl.searchParams.set("redirect", request.nextUrl.pathname);
     loginUrl.searchParams.set("toast", "請先登入");
     loginUrl.searchParams.set("toastType", "error");
+
+    console.log(
+      `[Middleware] 攔截未登入請求: ${request.nextUrl.pathname}，執行伺服器重定向`,
+    );
     return NextResponse.redirect(loginUrl);
   }
 
