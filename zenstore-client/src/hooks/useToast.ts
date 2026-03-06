@@ -1,28 +1,28 @@
 import { useCallback, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/hooks/redux";
 import { addToast } from "@/store/toastSlice";
 
 type ToastType = "success" | "error" | "warning" | "info";
 
+// 全域鎖：防止因為組件 Remount 導致的重複 Toast 觸發
+let globalLastToast: { message: string; timestamp: number } | null = null;
+
 export const useToast = () => {
-  const dispatch = useDispatch();
-  const lastToastRef = useRef<{ message: string; timestamp: number } | null>(
-    null
-  );
+  const dispatch = useAppDispatch();
 
   const showToast = useCallback(
     (message: string, type: ToastType = "info") => {
       const now = Date.now();
       if (
-        lastToastRef.current?.message === message &&
-        now - lastToastRef.current.timestamp < 3000
+        globalLastToast?.message === message &&
+        now - globalLastToast.timestamp < 3000
       ) {
         return;
       }
       dispatch(addToast({ id: now, type, message }));
-      lastToastRef.current = { message, timestamp: now };
+      globalLastToast = { message, timestamp: now };
     },
-    [dispatch]
+    [dispatch],
   );
 
   return { showToast };
