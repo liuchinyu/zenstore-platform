@@ -94,7 +94,7 @@ docker-compose up -d
 | -------------- | --------------------- |
 | 前台（Client） | http://localhost:3000 |
 | 後台（Admin）  | http://localhost:3001 |
-| 後端 API       | http://localhost:5000 |
+| 後端 API       | http://localhost:8080 |
 
 ---
 
