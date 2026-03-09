@@ -1,13 +1,4 @@
 services:
-  # --- 1. 基礎設施：Redis ---
-  # 注意：在 Docker 內部，你的 back-end 要連 redis，host 請改用 "redis"
-  redis:
-    image: redis:7-alpine
-    container_name: zenstore-redis
-    restart: always
-    ports:
-      - "6379:6379"
-
   # --- 2. 後端 API (back-end) ---
   api-server:
     build:
@@ -33,13 +24,15 @@ services:
       # 重要：這裡要連到上面的 redis 服務名稱
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_DB=${REDIS_DB:-0}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB:-1}
       # Oracle 連線
       - DBUSER=${DBUSER}
       - PASSWORD=${PASSWORD}
       - CONNECT_STRING=${CONNECT_STRING}
-    depends_on:
-      - redis
+    networks:
+      - default
+      - chatwoot_net
 
   # --- 3. 前端前台 (zenstore-client) ---
   frontend-user:
@@ -81,3 +74,10 @@ services:
       - "3001:3000" # 外部訪問 3001
     depends_on:
       - api-server
+
+networks:
+  default:
+    name: zenstore-monorepo_default
+  chatwoot_net:
+    external: true
+    name: chatwoot_default
