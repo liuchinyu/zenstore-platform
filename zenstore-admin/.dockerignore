@@ -1,8 +1,12 @@
+.git
+.gitignore
+.env
+**/.env
+**/.env.local
 node_modules
 .next
+dist
 build
-.git
+README.md
+.cursor
 *.tsbuildinfo
-.env.local
-
-
