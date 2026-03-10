@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   typescript: {
     // 在生產環境建置時忽略 TypeScript 錯誤
     ignoreBuildErrors: true,

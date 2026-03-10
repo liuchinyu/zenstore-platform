@@ -2,24 +2,25 @@
 FROM node:20-bullseye-slim AS builder
 WORKDIR /app
 
-# 複製 package 檔案
 COPY package.json package-lock.json ./
 RUN npm install
 
-# 複製所有程式碼
 COPY . .
-
-# 執行編譯
 RUN npm run build
 
-# --- 階段 2: Run (正式運行) ---
+# --- 階段 2: Production Dependencies (僅安裝生產環境套件) ---
+FROM node:20-bullseye-slim AS prod-deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install --omit=dev
+
+# --- 階段 3: Run (正式運行) ---
 FROM node:20-bullseye-slim AS runner
 WORKDIR /app
 
-# 設定環境為生產模式
 ENV NODE_ENV production
 
-# 安裝 Oracle Instant Client 所需的依賴
+# 安裝 Oracle Instant Client
 RUN apt-get update && apt-get install -y libaio1 wget unzip && \
     mkdir -p /opt/oracle && \
     cd /opt/oracle && \
@@ -31,15 +32,15 @@ RUN apt-get update && apt-get install -y libaio1 wget unzip && \
     apt-get purge -y wget unzip && apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
-# 設定環境變數
 ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_21_13
 
-# 複製編譯後的程式與依賴
+# 1. 複製編譯後的程式碼
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
+# 2. 複製僅含生產環境的 node_modules
+COPY --from=prod-deps /app/node_modules ./node_modules
+# 3. 複製設定檔
 COPY --from=builder /app/package.json ./package.json
 
-# 暴露埠號
 EXPOSE 8080
 
 CMD ["node", "dist/src/app.js"]
