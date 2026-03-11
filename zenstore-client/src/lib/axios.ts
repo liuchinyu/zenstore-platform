@@ -1,7 +1,9 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8080/api/client",
+  baseURL:
+    process.env.NEXT_PUBLIC_CLIENT_API_URL ||
+    "http://localhost:8080/api/client",
   withCredentials: true,
 });
 

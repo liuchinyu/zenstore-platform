@@ -42,6 +42,7 @@ services:
       args:
         - NEXT_PUBLIC_CHATWOOT_BASE_URL=${NEXT_PUBLIC_CHATWOOT_BASE_URL}
         - NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN=${NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN}
+        - NEXT_PUBLIC_CLIENT_API_URL=${NEXT_PUBLIC_CLIENT_API_URL}
         - NEXT_IMAGE_UNOPTIMIZED=${NEXT_IMAGE_UNOPTIMIZED}
     container_name: zenstore-client
     restart: always
@@ -50,6 +51,7 @@ services:
     environment:
       - NODE_TLS_REJECT_UNAUTHORIZED=0
       - NEXT_IMAGE_UNOPTIMIZED=${NEXT_IMAGE_UNOPTIMIZED}
+      - NEXT_PUBLIC_CLIENT_API_URL=${NEXT_PUBLIC_CLIENT_API_URL}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     dns:
