@@ -30,6 +30,8 @@ services:
       - DBUSER=${DBUSER}
       - PASSWORD=${PASSWORD}
       - CONNECT_STRING=${CONNECT_STRING}
+      # CORS 連線
+      - CORS_ORIGINS=${CORS_ORIGINS}
     networks:
       - default
       - chatwoot_net

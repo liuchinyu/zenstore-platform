@@ -65,7 +65,9 @@ export default function Login() {
       // 處理登入成功（完全驗證）
       if (result.data?.success === true) {
         showToast("登入成功！" + result.message, "success");
-        router.replace("/");
+        // router.replace("/");
+        // 調整為硬載入確保token可以被讀取
+        window.location.replace("/");
         return;
       }
       // 處理登入成功但未驗證信箱

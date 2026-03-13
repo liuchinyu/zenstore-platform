@@ -4,6 +4,15 @@ import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // 開發測試
+  async rewrites() {
+    return [
+      {
+        source: "/api/client/:path*",
+        destination: "http://api-server:8080/api/client/:path*",
+      },
+    ];
+  },
   typescript: {
     // 在生產環境建置時忽略 TypeScript 錯誤
     ignoreBuildErrors: true,

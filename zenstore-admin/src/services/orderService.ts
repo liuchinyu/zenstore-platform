@@ -8,7 +8,7 @@ class OrderService {
 
   constructor() {
     this.API_URL =
-      process.env.NEXT_PUBLICK_API_URL ||
+      process.env.NEXT_PUBLIC_API_URL + "/order" ||
       "http://localhost:8080/api/admin/order";
   }
 
