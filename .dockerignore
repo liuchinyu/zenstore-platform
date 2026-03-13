@@ -18,6 +18,7 @@
 **/.next
 **/dist
 **/build
+**/.agent
 
 # 排除說明文件與編輯器設定
 **/README.md
