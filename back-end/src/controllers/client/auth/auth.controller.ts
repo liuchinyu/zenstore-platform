@@ -206,8 +206,12 @@ router.post("/login", (async (req: Request, res: Response) => {
     // 設定 HTTP-only Cookie
     res.cookie("token", result.token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // 生產環境建議啟用
-      sameSite: "strict", // 防止 CSRF
+      // secure: process.env.NODE_ENV === "production", // 生產環境建議啟用
+      // sameSite: "strict", // 防止 CSRF
+      // 開發環境測試
+      secure:
+        req.protocol === "https" || req.get("x-forwarded-proto") === "https",
+      sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000, // 1天
     });
 
@@ -337,8 +341,12 @@ router.post("/logout", authenticateToken, (req: Request, res: Response) => {
     // 清除 token cookie
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      // secure: process.env.NODE_ENV === "production",
+      // sameSite: "strict",
+      // 開發測試
+      secure:
+        req.protocol === "https" || req.get("x-forwarded-proto") === "https",
+      sameSite: "lax",
     });
 
     res.status(200).json({
